@@ -4,8 +4,11 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { UserContext } from '@/context/UserAuth';
 import { ChangeEvent, SyntheticEvent, useContext, useState } from "react";
+import { useToast } from "@/components/ui/use-toast"
 
 export default function Login() {
+  const { toast } = useToast()
+
   const [isLoading, setIsLoading] = useState(false)
   const { login } = useContext(UserContext); 
   
@@ -16,10 +19,24 @@ export default function Login() {
     setIsLoading(true)
     event.preventDefault();
 
-    const userData = { email: email, password: password };
-    const userLogin = await login(userData)
-    console.log(userLogin)
+      const userData = { email: email, password: password };
+      const response = await login(userData)
 
+      if(response.status){
+        toast({
+          variant: "default",
+          description: "Login reaizado com sucesso.",
+        })
+      }else{
+        toast({
+          variant: "destructive",
+          description: response.message,
+        })
+      }
+      
+
+      
+    
     setIsLoading(false)
   }
   return (

@@ -13,13 +13,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDownIcon  } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast"
+
 
 export default function Menu() {
+  const { toast } = useToast()
+
   const { user } = useContext(UserContext); 
   const { logout } = useContext(UserContext); 
 
   const handleLogout = async () => {
     await logout()
+    toast({
+      description: "Logout reaizado com sucesso.",
+    })
   }
   
   return (
