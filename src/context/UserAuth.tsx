@@ -79,6 +79,7 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
       
 
     } catch (error) {
+      console.log(error)
       return {
         message: 'Login inválido',
         status: false
