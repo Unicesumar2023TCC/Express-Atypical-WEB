@@ -3,7 +3,7 @@ import { IncomingMessage } from "http";
 
 export default async function checkAuthUser(req: IncomingMessage & { cookies: Partial<{ [key: string]: string; }>; }){
     try {
-        const response = await api.get('http://localhost:3000/api/user', {
+        const response = await api.get('https://expressatypical.inffus.com.br/user', {
             headers: {
                 'Authorization': `Bearer ${req.cookies.jwt}`
             },
