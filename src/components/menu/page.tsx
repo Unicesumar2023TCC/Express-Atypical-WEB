@@ -25,7 +25,7 @@ export default function Menu() {
   const handleLogout = async () => {
     await logout()
     toast({
-      description: "Logout reaizado com sucesso.",
+      description: "Logout realizado com sucesso.",
     })
   }
   

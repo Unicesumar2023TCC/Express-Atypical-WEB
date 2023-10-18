@@ -25,7 +25,7 @@ export default function Login() {
       if(response.status){
         toast({
           variant: "default",
-          description: "Login reaizado com sucesso.",
+          description: "Login realizado com sucesso.",
         })
       }else{
         toast({
