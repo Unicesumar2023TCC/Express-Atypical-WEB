@@ -7,10 +7,9 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 const DataLogs = async () => {
     
     const token = cookies().get('jwt')
-    console.log(token)
     const response = await api.get('logs', {
         headers: {
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ik1hdGhldXMiLCJlbWFpbCI6Im1hdGhldXNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWmNoZ2g4dy9zWGdoZkViV2lOVmt2ZVNsQXFobGEuRWtOd3d6OXpPN3duMUtxRE9GWGt2VkMiLCJwaG9uZSI6Iig0MSk5ODc4OC00NDA0IiwiYmlydGhEYXRlIjoiMjAyMC0xMi0wNVQwMDowMDowMC4wMDBaIiwic3RhdHVzIjoiQUNUSVZFIiwiY3JlYXRlZEF0IjoiMjAyMy0xMC0xOFQxNjo1ODo0NC45NTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMC0xOFQxNjo1ODo0NC45NTFaIiwiZGVsZXRlZCI6ZmFsc2UsInR5cGUiOiJSZXNwb25zaWJsZSIsImlhdCI6MTY5NzY1MDc1NywiZXhwIjoxNjk4MjU1NTU3fQ.pdnGP-PL0XEuRNE7t9ex8CGw_bNJzy89Cx3MevK-M3E`
+            'Authorization': `Bearer ${token?.value}`
           },
     });
     return response.data
