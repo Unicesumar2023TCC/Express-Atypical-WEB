@@ -5,11 +5,13 @@ import { cookies } from 'next/headers'
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
 const DataLogs = async () => {
+    
     const token = cookies().get('jwt')
+    console.log(token)
     const response = await api.get('logs', {
         headers: {
             'Authorization': `Bearer ${token?.value}`
-            },
+          },
     });
     return response.data
 }
