@@ -9,6 +9,6 @@ const api = Axios.create({
 });
 
 // Adicionando configuração para permitir todas as origens
-api.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://express-atypical-n9968dcvz-matheus-oliveiras-projects.vercel.app/';
+api.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://express-atypical-n9968dcvz-matheus-oliveiras-projects.vercel.app';
 
 export default api;
