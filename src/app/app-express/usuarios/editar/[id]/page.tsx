@@ -1,13 +1,13 @@
 
-import { DataTable } from "@/components/tables/logs/page";
+import FormUser from "@/components/forms/user/page";
+import { Input } from "@/components/ui/input";
 import api from "@/services/api"
 import { cookies } from 'next/headers'
-import { User, columns } from "./columns"
 
 
-const DataLogs = async () => {
+const UserData = async () => {
   const token = cookies().get('jwt')
-  const response = await api.get('user/all', {
+  const response = await api.get(`user/${1}`, {
     headers: {
       'Authorization': `Bearer ${token?.value}`
     },
@@ -15,16 +15,16 @@ const DataLogs = async () => {
   return response.data
 }
 
-export default async function Logs(){
-  const usersData = await DataLogs();
+export default async function Usuario({ params }: { params: { slug: string } }) {
+  const userData = await UserData();
 
   return (
     <section className="flex justify-center items-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 container"> 
       <div className="text-center space-y-6 w-full max-w-screen-lg md:max-w-screen-xl lg:max-w-screen-2xl pt-20">
-        <h1 className="text-4xl text-express-blue">Usuários</h1>
+        <h1 className="text-4xl text-express-blue">Editar usuário {userData.name}</h1>
         <div className="pt-5">
           <div className="overflow-x-auto">
-            <DataTable data={usersData} columns={columns} />
+            <FormUser user={userData}/>
           </div>
         </div>
       </div>

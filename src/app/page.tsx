@@ -5,6 +5,7 @@ import Link from "next/link";
 import { UserContext } from '@/context/UserAuth';
 import { ChangeEvent, SyntheticEvent, useContext, useState } from "react";
 import { useToast } from "@/components/ui/use-toast"
+import ButtonLoading from "@/components/loadingButton/page";
 
 export default function Login() {
   const { toast } = useToast()
@@ -33,9 +34,6 @@ export default function Login() {
           description: response.message,
         })
       }
-      
-
-      
     
     setIsLoading(false)
   }
@@ -60,14 +58,20 @@ export default function Login() {
             }
           
           />
-
-          <Button
-            type="submit"
-            variant="outline"
-            className="p-4 text-white bg-express-green hover:bg-[#93F283] rounded-lg"
-          >
-            Login
-          </Button>
+      
+          {!isLoading ? (
+            <Button
+              type="submit"
+              variant="outline"
+              className="p-4 text-white bg-express-green hover:bg-[#93F283] rounded-lg"
+            >
+              Login
+            </Button>
+          ) : (
+            <ButtonLoading />
+          )}
+          
+          
           <Link href={"esqueci-a-senha"} >Esqueceu a senha?</Link>
         </form>
       </div>
