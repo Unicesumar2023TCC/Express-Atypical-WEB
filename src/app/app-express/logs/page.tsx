@@ -28,14 +28,13 @@ const DataLogs = async () => {
   
 }
 
-
-type Logs = {
+type Payment = {
     id: string
     amount: number
     status: "pending" | "processing" | "success" | "failed"
     email: string
   }
-const columns: ColumnDef<Logs>[] = [
+const columns: ColumnDef<Payment>[] = [
     {
       accessorKey: "idUser",
       header: "Id Usuário",
