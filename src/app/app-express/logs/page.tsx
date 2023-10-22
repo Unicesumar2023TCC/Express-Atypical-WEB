@@ -5,22 +5,37 @@ import { cookies } from 'next/headers'
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
 const DataLogs = async () => {
+  const nextCookies = cookies();
+  const token = nextCookies.get('jwt')
+
+  if(!token) {
+    throw new Error("Missing token")
+  }
     
-    const token = cookies().get('jwt')
+  try{
     const response = await api.get('logs', {
-        headers: {
-            'Authorization': `Bearer ${token?.value}`
-          },
+      headers: {
+          'Authorization': `Bearer ${token?.value}`
+        },
     });
+
     return response.data
+  }catch(error: any){
+    console.log(token);
+     console.log(error.response.data);
+     return null;
+  }
+  
 }
-type Payment = {
+
+
+type Logs = {
     id: string
     amount: number
     status: "pending" | "processing" | "success" | "failed"
     email: string
   }
-const columns: ColumnDef<Payment>[] = [
+const columns: ColumnDef<Logs>[] = [
     {
       accessorKey: "idUser",
       header: "Id Usuário",
