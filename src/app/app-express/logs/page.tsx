@@ -8,6 +8,8 @@ const DataLogs = async () => {
   const nextCookies = cookies();
   const token = nextCookies.get('jwt')
 
+  console.log(token)
+  
   if(!token) {
     throw new Error("Missing token")
   }
