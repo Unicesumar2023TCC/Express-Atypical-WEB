@@ -3,12 +3,14 @@ import ButtonLoading from "@/components/loadingButton/page"
 import { Button } from "@/components/ui/button"
 import api from "@/services/api"
 import { Input } from "@/components/ui/input"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, SyntheticEvent, useState } from "react"
 import Link from "next/link"
+import { useToast } from "@/components/ui/use-toast"
 
 
 
 export default function FormUser(User : any){
+    const { toast } = useToast()
     const user = User.user;
     
     const [isLoading, setIsLoading] = useState(false)
@@ -18,8 +20,40 @@ export default function FormUser(User : any){
     const [birthDate, setBirthDate] = useState(user.birthDate)
     const [phone, setPhone] = useState(user.phone)
     
+
+    async function handleForm(event: SyntheticEvent) {
+        setIsLoading(true)
+        event.preventDefault();
+    
+        const data = { 
+            id: user.id,
+            name: name, 
+            email: email, 
+            birthDate: birthDate,
+            phone: phone,
+        };
+
+        try{
+
+            await api.put('/user', data)
+            toast({
+                description: "Editado com sucesso!",
+            })
+            
+        }catch(error: any){
+            console.log(error)
+            toast({
+                description: `Falha ao editar ${error.response.data.error}`,
+            })
+        }
+          
+        
+        
+        setIsLoading(false)
+      }
+
     return (
-        <form className="pt-5 grid grid-cols-2 gap-4 container" >
+        <form className="pt-5 grid grid-cols-2 gap-4 container" onSubmit={handleForm}>
             <Input
                 required 
                 value={name}
@@ -53,29 +87,23 @@ export default function FormUser(User : any){
                 }
             />
         
+            <Link
+                href={"/app-express/usuarios"}
+                className="text-center flex justify-center items-center text-white bg-express-red hover:bg-[red] rounded-lg outline"
+            >
+                Cancelar
+            </Link>
             {!isLoading ? (
-                <>
-                    <Link
-                        href={"/app-express/usuarios"}
-                        className="text-center flex justify-center items-center text-white bg-express-red hover:bg-[red] rounded-lg outline"
-                    >
-                        Cancelar
-                    </Link>
-
-                    <Button
-                        type="submit"
-                        variant="outline"
-                        className="p-4 text-white bg-express-green hover:bg-[#93F283] rounded-lg"
-                    >
-                        Salvar
-                    </Button>
-                </>
+                <Button
+                    type="submit"
+                    variant="outline"
+                    className="p-4 text-white bg-express-green hover:bg-[#93F283] rounded-lg"
+                >
+                    Salvar
+                </Button>
                 
             ) : (
-                <>
-                    <ButtonLoading />
-                    <ButtonLoading />
-                </>
+                <ButtonLoading />
             )}
             
         </form>
