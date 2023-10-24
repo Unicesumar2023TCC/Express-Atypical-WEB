@@ -33,7 +33,7 @@ export default function Menu() {
     <nav className="z-10 flex items-center justify-between flex-wrap bg-express-blue p-5 fixed w-full">
       <div className="container mx-auto flex justify-between">
         <div className="flex items-center">
-          <Link href={'/'}>
+          <Link href={(user ? `/app-express` : `/`)}>
             <Image src="/img/quebra-cabeca.png"  alt=";;" width={50} height={50}/>
           </Link>
         </div>
