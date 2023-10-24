@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const api = Axios.create({
-    baseURL: 'http://localhost:3002/',
+    baseURL: 'https://expressatypical.inffus.com.br/',
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
