@@ -4,9 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import api from "@/services/api"
 import { cookies } from 'next/headers'
 
-const DataLogs = async () => {
+const Data = async () => {
     const token = cookies().get('jwt')
-    const response = await api.get('logs', {
+    const response = await api.get('dashboard', {
         headers: {
             'Authorization': `Bearer ${token?.value}`
             },
@@ -15,8 +15,9 @@ const DataLogs = async () => {
 }
 
 export default async function Express(){
-    //const logdata = await DataLogs();
+    const dashboardData = await Data();
     
+    console.log(dashboardData.lastUsers)
     return (
         <section className="flex justify-center items-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 container"> 
           <div className="text-center space-y-6 w-full pt-20">
@@ -65,7 +66,7 @@ export default async function Express(){
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+2350</div>
+                  <div className="text-2xl font-bold">+{dashboardData.lastUsersCount}</div>
                 </CardContent>
               </Card>
               <Card>
@@ -86,7 +87,7 @@ export default async function Express(){
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+12,234</div>
+                  <div className="text-2xl font-bold">+{dashboardData.actions}</div>
                 </CardContent>
               </Card>
               <Card>
@@ -108,7 +109,7 @@ export default async function Express(){
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+573</div>
+                  <div className="text-2xl font-bold">+{dashboardData.allUsersCount}</div>
                 </CardContent>
               </Card>
             </div>
@@ -121,7 +122,7 @@ export default async function Express(){
                   <Overview />
                 </CardContent>
               </Card>
-              <RecentUsers />
+              <RecentUsers count={dashboardData.lastUsersCount} lastUsers={dashboardData.lastUsers} />
             </div>
           </div>
         </section>
