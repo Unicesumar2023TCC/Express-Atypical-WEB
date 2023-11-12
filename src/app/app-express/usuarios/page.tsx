@@ -1,22 +1,12 @@
 
 import { DataTable } from "@/components/tables/logs/page";
-import api from "@/services/api"
-import { cookies } from 'next/headers'
 import { User, columns } from "./columns"
-
-
-const DataLogs = async () => {
-  const token = cookies().get('jwt')
-  const response = await api.get('user/all', {
-    headers: {
-      'Authorization': `Bearer ${token?.value}`
-    },
-  });
-  return response.data
-}
+import { fetchUsers } from "@/actions/fetch-users";
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export default async function Logs(){
-  const usersData = await DataLogs();
+  const usersData = await fetchUsers();
 
   return (
     <section className="flex justify-center items-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 container"> 

@@ -1,13 +1,13 @@
 
 import FormUser from "@/components/forms/user/page";
-import { Input } from "@/components/ui/input";
 import api from "@/services/api"
 import { cookies } from 'next/headers'
 
 
-const UserData = async () => {
+const UserData = async (id: string) => {
+
   const token = cookies().get('jwt')
-  const response = await api.get(`user/${1}`, {
+  const response = await api.get(`user/${id}`, {
     headers: {
       'Authorization': `Bearer ${token?.value}`
     },
@@ -15,8 +15,9 @@ const UserData = async () => {
   return response.data
 }
 
-export default async function Usuario({ params }: { params: { slug: string } }) {
-  const userData = await UserData();
+export default async function Usuario({ params }: { params: { id: string } }) {
+
+  const userData = await UserData(params.id);
 
   return (
     <section className="flex justify-center items-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 container"> 
