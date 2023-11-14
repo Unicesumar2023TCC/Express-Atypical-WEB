@@ -21,7 +21,7 @@ export default async function Express(){
     return (
         <section className="flex justify-center items-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 container"> 
           <div className="text-center space-y-6 w-full pt-20">
-            <h1 className="text-4xl text-express-blue">Express</h1>
+            <h1 className="text-4xl text-express-blue">Express Atypical</h1>
             <div className="pt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
