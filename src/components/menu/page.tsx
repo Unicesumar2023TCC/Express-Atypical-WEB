@@ -40,13 +40,13 @@ export default function Menu() {
         <div className="flex items-center space-x-3">
           {user && (
             <>
-              <Link href={'/app-express/usuarios'}>
+              <a href={'/app-express/usuarios'}>
                 <span className="text-2xl text-express font-bod uppercase">Usuários</span>
-              </Link>
+              </a>
 
-              <Link href={'/app-express/logs'}>
+              <a href={'/app-express/logs'}>
                 <span className="text-2xl text-express font-bod uppercase">Logs</span>
-              </Link>
+              </a>
               
 
 
